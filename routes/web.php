@@ -15,6 +15,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+//CRUD
+
 Route::get('/builds', [ResourceController::class, 'showAllBuilds'])->name('showAllBuilds');
 
 Route::get('/builds/{id}/detail', [ResourceController::class, 'getDetailPart']);
