@@ -87,4 +87,23 @@ class ResourceController extends Controller
             return response()->json(['error' => 'Failed to create build', 'details' => $e->getMessage()], 500);
         }
     }
+
+    public function deleteBuild($id)
+    {
+        $pcBuild = PcBuilds::findOrFail($id);
+        
+        // Get all related part IDs before detaching
+        $partIds = $pcBuild->parts->pluck('id')->toArray();
+
+        // Detach all related parts
+        $pcBuild->parts()->detach();
+        
+        // Delete the PC build
+        $pcBuild->delete();
+
+        // Delete parts that were associated with this build
+        PcParts::whereIn('id', $partIds)->delete();
+
+        return response()->json(['message' => 'PC Build and its parts deleted successfully']);
+    }
 }

@@ -35,7 +35,7 @@
                 }
             });
 
-            const response = await fetch('/builds/add-new-build', {
+            const response = await fetch('/builds/add', {
                 method: 'POST',
                 headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                 body: formData

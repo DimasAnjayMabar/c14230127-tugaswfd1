@@ -21,7 +21,9 @@ Route::get('/builds', [ResourceController::class, 'showAllBuilds'])->name('showA
 
 Route::get('/builds/{id}/detail', [ResourceController::class, 'getDetailPart']);
 
-Route::post('/builds/add-new-build', [ResourceController::class, 'addNewBuild'])->name('addNewBuild');
+Route::post('/builds/add', [ResourceController::class, 'addNewBuild'])->name('addNewBuild');
+
+Route::delete('/builds/{id}/delete', [ResourceController::class, 'deleteBuild'])->name('deleteBuild');
 
 
 

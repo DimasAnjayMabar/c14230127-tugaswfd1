@@ -34,8 +34,11 @@
                                 <button @click="fetchBuildDetail({{ $build->id }})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
                                     Details
                                 </button>
-                                <button @click="fetchBuildDetail2({{ $build->id }})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                <button @click="fetchForEdit({{ $build->id }})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
                                     Edit
+                                </button>
+                                <button @click="fetchForDelete({{ $build->id }})" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                    Delete
                                 </button>
                             </div>
                         </div>
@@ -47,6 +50,7 @@
         
         @include('detail_build')
         @include('edit_build')
+        @include('delete_build')
 
         @include('add_build')
 
@@ -90,7 +94,7 @@
             });
         });
     
-        function fetchBuildDetail2(buildId) {
+        function fetchForEdit(buildId) {
             fetch(`/builds/${buildId}/detail`)
                 .then(response => response.json())
                 .then(data => {
@@ -107,5 +111,28 @@
                 .catch(error => console.error('Error fetching details:', error));
         }
     </script>
+
     <!-- Script to load delete build modal -->
+    <script>
+         document.addEventListener('alpine:init', () => {
+            Alpine.store('deleteModal', {
+                open: false,
+                build: {
+                    id: null,
+                    name: '',
+                    description: '',
+                }
+            });
+        });
+
+        function fetchForDelete(buildId) {
+            fetch(`/builds/${buildId}/detail`)
+            .then(response => response.json())
+            .then(data => {
+                Alpine.store('deleteModal').open = true;
+                Alpine.store('deleteModal').build = data;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 @endsection
