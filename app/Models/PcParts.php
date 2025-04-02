@@ -13,7 +13,8 @@ class PcParts extends Model
 
     public function builds()
     {
-        return $this->belongsToMany(PcBuilds::class, 'detailed_build');
+        return $this->belongsToMany(PcBuilds::class, 'detailed_build', 'pc_parts_id', 'pc_builds_id')
+                    ->withPivot('quantity');
     }
 }
 

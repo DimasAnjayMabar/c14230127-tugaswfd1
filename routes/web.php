@@ -25,5 +25,14 @@ Route::post('/builds/add', [ResourceController::class, 'addNewBuild'])->name('ad
 
 Route::delete('/builds/{id}/delete', [ResourceController::class, 'deleteBuild'])->name('deleteBuild');
 
+Route::get('/builds/get-latest-part-id', [ResourceController::class, 'getDetailPart']);
+
+// Add this GET route to load the edit form
+Route::get('/builds/{id}/edit', [ResourceController::class, 'showEditForm'])->name('showEditForm');
+
+// Keep your existing PUT route for form submission
+Route::put('/builds/{id}/edit', [ResourceController::class, 'editBuild'])->name('editBuild');
+
+
 
 
