@@ -1,4 +1,4 @@
-## About Laravel
+## PLEASE READ ME
 
 There is still problems such as : 
 - a certain row of add and edit wont deleted after clicking cross button, instead it is deleting the latest row of it (check at : add_build, edit_build at "<template>" part)
